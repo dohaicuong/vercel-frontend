@@ -1,11 +1,30 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
+import { createRoot } from 'react-dom'
+import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { BrowserRouter as Router } from 'react-router-dom'
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import RelayProvider from '@/providers/relay/RelayProvider'
+import ThemeProvider from '@/providers/theme/ThemeProvider'
+import RouteProvider from '@/providers/routes/RouteProvider'
+import { SnackbarProvider } from 'notistack'
+
+const rootElement = document.getElementById('root')
+if(!rootElement) throw new Error('Root element not found. Unable to render the App')
+
+const AppFallback = () => <>Something went wrong</>
+
+createRoot(rootElement).render(
+  <ThemeProvider>
+    <SnackbarProvider maxSnack={3}>
+      <ErrorBoundary FallbackComponent={AppFallback}>
+        <Suspense fallback='Loading...'>
+          <Router>
+            <RelayProvider>
+              <RouteProvider />
+            </RelayProvider>
+          </Router>
+        </Suspense>
+      </ErrorBoundary>
+    </SnackbarProvider>
+  </ThemeProvider>
 )

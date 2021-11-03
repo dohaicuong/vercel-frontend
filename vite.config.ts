@@ -1,7 +1,17 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import path from 'path'
 
-// https://vitejs.dev/config/
+import react from '@vitejs/plugin-react'
+import relay from 'vite-plugin-relay'
+
 export default defineConfig({
-  plugins: [react()]
+  server: {
+    port: 3001
+  },
+  resolve: {
+    alias: {
+      '@/': `${path.resolve(__dirname, 'src')}/`
+    },
+  },
+  plugins: [react(), relay],
 })
