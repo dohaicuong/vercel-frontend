@@ -9,6 +9,7 @@ export type PostListItem_post = {
     readonly id: string;
     readonly title: string;
     readonly body: string;
+    readonly logo: string | null;
     readonly " $refType": "PostListItem_post";
 };
 export type PostListItem_post$data = PostListItem_post;
@@ -45,10 +46,17 @@ const node: ReaderFragment = {
       "kind": "ScalarField",
       "name": "body",
       "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "logo",
+      "storageKey": null
     }
   ],
   "type": "Post",
   "abstractKey": null
 };
-(node as any).hash = 'fe12bf7f7da6eaccc7e953560cc3fef7';
+(node as any).hash = '218e134cef6c8aa39b239d89f7c59ea3';
 export default node;

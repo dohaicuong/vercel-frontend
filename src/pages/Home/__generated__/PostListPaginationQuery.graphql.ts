@@ -31,6 +31,7 @@ fragment PostListItem_post on Post {
   id
   title
   body
+  logo
 }
 
 fragment PostList_query_1G22uz on Query {
@@ -158,6 +159,13 @@ return {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "logo",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "__typename",
                     "storageKey": null
                   }
@@ -214,12 +222,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "e494d69cd5a785df2903effb0eeca4fb",
+    "cacheID": "c0f2930e7b35d09e9394e390f9e00518",
     "id": null,
     "metadata": {},
     "name": "PostListPaginationQuery",
     "operationKind": "query",
-    "text": "query PostListPaginationQuery(\n  $count: Int! = 10\n  $cursor: String\n) {\n  ...PostList_query_1G22uz\n}\n\nfragment PostListItem_post on Post {\n  id\n  title\n  body\n}\n\nfragment PostList_query_1G22uz on Query {\n  posts(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        ...PostListItem_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query PostListPaginationQuery(\n  $count: Int! = 10\n  $cursor: String\n) {\n  ...PostList_query_1G22uz\n}\n\nfragment PostListItem_post on Post {\n  id\n  title\n  body\n  logo\n}\n\nfragment PostList_query_1G22uz on Query {\n  posts(first: $count, after: $cursor) {\n    edges {\n      node {\n        id\n        ...PostListItem_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();

@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "schema": "cp ../backend/schema.graphql ./",
+    "schema": "cp ../vercel-backend/schema.graphql ./",
     "relay": "yarn schema && relay-compiler"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.18.1",
     "react-relay": "^12.0.0",
+    "react-relay-network-modern": "^6.2.1",
     "react-router-dom": "^6.0.0-beta.8",
     "relay-runtime": "^12.0.0",
     "vite-plugin-relay": "^1.0.6"

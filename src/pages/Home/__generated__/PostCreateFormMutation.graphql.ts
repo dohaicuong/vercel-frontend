@@ -7,6 +7,7 @@ import { ConcreteRequest } from "relay-runtime";
 import { FragmentRefs } from "relay-runtime";
 export type PostCreateInput = {
     body: string;
+    logo?: File | null | undefined;
     title: string;
 };
 export type PostCreateFormMutationVariables = {
@@ -43,6 +44,7 @@ fragment PostListItem_post on Post {
   id
   title
   body
+  logo
 }
 */
 
@@ -150,6 +152,13 @@ return {
                 "kind": "ScalarField",
                 "name": "body",
                 "storageKey": null
+              },
+              {
+                "alias": null,
+                "args": null,
+                "kind": "ScalarField",
+                "name": "logo",
+                "storageKey": null
               }
             ],
             "storageKey": null
@@ -181,12 +190,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "1ae71468cbf5c2f67317775d687b9cca",
+    "cacheID": "9fdbe387fdc7878eb4c80a769921645e",
     "id": null,
     "metadata": {},
     "name": "PostCreateFormMutation",
     "operationKind": "mutation",
-    "text": "mutation PostCreateFormMutation(\n  $input: PostCreateInput!\n) {\n  postCreate(input: $input) {\n    post {\n      ...PostListItem_post\n      id\n    }\n  }\n}\n\nfragment PostListItem_post on Post {\n  id\n  title\n  body\n}\n"
+    "text": "mutation PostCreateFormMutation(\n  $input: PostCreateInput!\n) {\n  postCreate(input: $input) {\n    post {\n      ...PostListItem_post\n      id\n    }\n  }\n}\n\nfragment PostListItem_post on Post {\n  id\n  title\n  body\n  logo\n}\n"
   }
 };
 })();

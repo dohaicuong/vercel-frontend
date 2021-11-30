@@ -25,6 +25,7 @@ fragment PostListItem_post on Post {
   id
   title
   body
+  logo
 }
 
 fragment PostList_query on Query {
@@ -124,6 +125,13 @@ return {
                     "alias": null,
                     "args": null,
                     "kind": "ScalarField",
+                    "name": "logo",
+                    "storageKey": null
+                  },
+                  {
+                    "alias": null,
+                    "args": null,
+                    "kind": "ScalarField",
                     "name": "__typename",
                     "storageKey": null
                   }
@@ -180,12 +188,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "06cc29e1cd6ff498e5bd1dd8e160fb72",
+    "cacheID": "840b8f75ac261b569a79dee547dbd1fc",
     "id": null,
     "metadata": {},
     "name": "HomeQuery",
     "operationKind": "query",
-    "text": "query HomeQuery {\n  ...PostList_query\n}\n\nfragment PostListItem_post on Post {\n  id\n  title\n  body\n}\n\nfragment PostList_query on Query {\n  posts(first: 10) {\n    edges {\n      node {\n        id\n        ...PostListItem_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
+    "text": "query HomeQuery {\n  ...PostList_query\n}\n\nfragment PostListItem_post on Post {\n  id\n  title\n  body\n  logo\n}\n\nfragment PostList_query on Query {\n  posts(first: 10) {\n    edges {\n      node {\n        id\n        ...PostListItem_post\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();

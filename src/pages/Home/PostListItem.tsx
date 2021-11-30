@@ -1,4 +1,4 @@
-import { ListItem, ListItemText } from '@mui/material'
+import { Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 import { useFragment, graphql } from 'react-relay'
 import { PostListItem_post$key } from './__generated__/PostListItem_post.graphql'
 
@@ -12,6 +12,7 @@ const PostListItem: React.FC<PostListItemProps> = ({ postRef }) => {
         id
         title
         body
+        logo
       }
     `,
     postRef
@@ -19,6 +20,9 @@ const PostListItem: React.FC<PostListItemProps> = ({ postRef }) => {
 
   return (
     <ListItem key={post.id}>
+      <ListItemAvatar>
+        <Avatar alt={post.title} src={post.logo || undefined} />
+      </ListItemAvatar>
       <ListItemText
         primary={post.title}
         secondary={post.body}

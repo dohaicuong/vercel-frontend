@@ -22,19 +22,25 @@ const PostCreateForm = () => {
   
   const { enqueueSnackbar } = useSnackbar()
   const { register, handleSubmit, reset } = useForm<PostCreateInput>()
-  const onSubmit: SubmitHandler<PostCreateInput> = data => postCreateCommit({
-    variables: {
-      input: data,
-      connections: [
-        'client:root:__PostList_query_posts_connection'
-      ]
-    },
-    onCompleted: (res, errors) => {
-      if(errors) return errors.forEach(error => enqueueSnackbar(error.message, { variant: 'error' }))
-
-      reset()
-    }
-  })
+  const onSubmit: SubmitHandler<PostCreateInput> = ({ title, body, logo }) => {
+    return postCreateCommit({
+      variables: {
+        input: {
+          title,
+          body,
+          logo: (logo as unknown as FileList)?.[0]
+        },
+        connections: [
+          'client:root:__PostList_query_posts_connection'
+        ]
+      },
+      onCompleted: (res, errors) => {
+        if(errors) return errors.forEach(error => enqueueSnackbar(error.message, { variant: 'error' }))
+  
+        reset()
+      }
+    })
+  }
 
   return (
     <Paper style={{ padding: 32, marginBottom: 32 }}>
@@ -49,6 +55,14 @@ const PostCreateForm = () => {
         <TextField
           label='content'
           {...register('body')}
+          disabled={isCreating}
+          fullWidth
+          style={{ marginBottom: 24 }}
+        />
+        <TextField
+          label='content'
+          {...register('logo')}
+          type='file'
           disabled={isCreating}
           fullWidth
           style={{ marginBottom: 24 }}

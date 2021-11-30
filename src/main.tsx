@@ -11,12 +11,10 @@ import { SnackbarProvider } from 'notistack'
 const rootElement = document.getElementById('root')
 if(!rootElement) throw new Error('Root element not found. Unable to render the App')
 
-const AppFallback = () => <>Something went wrong</>
-
 createRoot(rootElement).render(
   <ThemeProvider>
     <SnackbarProvider maxSnack={3}>
-      <ErrorBoundary FallbackComponent={AppFallback}>
+      <ErrorBoundary fallback={<>Something went wrong</>}>
         <Suspense fallback='Loading...'>
           <Router>
             <RelayProvider>

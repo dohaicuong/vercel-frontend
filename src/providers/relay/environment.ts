@@ -1,29 +1,21 @@
-import { Environment, Network, RecordSource, Store } from 'relay-runtime'
+import 'regenerator-runtime/runtime'
 
-const {
-  VITE_API_ENDPOINT,
-  // VITE_SUBSCRIPTION_ENDPOINT,
-} = import.meta.env
+import { authMiddleware, RelayNetworkLayer, uploadMiddleware, urlMiddleware } from 'react-relay-network-modern'
+import { Environment, RecordSource, Store } from 'relay-runtime'
 
-const network = Network.create(async (params, variables) => {
-  const jwt = localStorage.getItem('jwt')
-
-  return fetch(VITE_API_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(jwt ? { Authorization: `Bearer ${jwt}` } : {}),
-    },
-    body: JSON.stringify({
-      query: params.text,
-      variables,
+// VITE_SUBSCRIPTION_ENDPOINT,
+const network = new RelayNetworkLayer(
+  [
+    urlMiddleware({
+      url: () => import.meta.env.VITE_API_ENDPOINT
     }),
-  })
-  .then(res => res.json())
-  // .then(res => {
-  //   return res
-  // })
-})
+    authMiddleware({
+      token: localStorage.getItem('jwt') || undefined
+    }),
+    uploadMiddleware(),
+  ],
+  { noThrow: true }
+)
 
 const store = new Store(new RecordSource())
 

@@ -7,4 +7,8 @@ module.exports = {
     '**/__mocks__/**',
     '**/__generated__/**'
   ],
+  customScalars: {
+    'Upload': 'File',
+    'Media': 'string',
+  },
 }

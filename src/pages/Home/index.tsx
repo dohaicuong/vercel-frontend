@@ -1,5 +1,6 @@
 import { Container, Paper } from '@mui/material'
 import { Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import { useLazyLoadQuery, graphql, PreloadedQuery, usePreloadedQuery } from 'react-relay'
 import PostCreateForm from './PostCreateForm'
 import PostList from './PostList'
@@ -21,9 +22,11 @@ const Home: React.FC<HomeProps> = ({ homeQueryRef }) => {
     <Container maxWidth='sm' style={{ marginTop: 32 }}>
       <PostCreateForm />
       <Paper>
-        <Suspense fallback='Loading posts...'>
-          <PostList queryRef={data} />
-        </Suspense>
+        <ErrorBoundary fallback={<>Something went wrong</>}>
+          <Suspense fallback='Loading posts...'>
+            <PostList queryRef={data} />
+          </Suspense>
+        </ErrorBoundary>
       </Paper>
     </Container>
   )
